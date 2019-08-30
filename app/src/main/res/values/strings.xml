@@ -1,0 +1,18 @@
+<resources>
+	<string name="app_name">Parking Manager</string>
+	<string name="title_activity_main">MainActivity</string>
+	<string name="title_activity_vehicle">Add Vehicle</string>
+	<string name="prompt_name">Name</string>
+	<string name="prompt_vehicle_number">MH 12 AB 1234</string>
+	<string name="prompt_mobile_number">Mobile No.</string>
+	<string name="action_register">Register</string>
+	<string name="invalid_name">Name can not be empty</string>
+	<string name="invalid_contact">Invalid mobile number</string>
+	<string name="invalid_vehicle">Invalid vehicle number</string>
+	<string name="registration_failed">"Registration failed"</string>
+
+	<string-array name="vehicle_types">
+		<item>2 Wheeler</item>
+		<item>4 Wheeler</item>
+	</string-array>
+</resources>
