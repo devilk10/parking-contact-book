@@ -12,9 +12,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-
-import com.example.parkingmanager.ui.registration.VehicleViewModel
+import com.example.parkingmanager.database.VehicleDatabase
 import com.example.parkingmanager.ui.registration.RegistrationViewModelFactory
+import com.example.parkingmanager.ui.registration.VehicleViewModel
 import kotlinx.android.synthetic.main.activity_vehicle.*
 
 class VehicleActivity : AppCompatActivity() {
@@ -32,7 +32,9 @@ class VehicleActivity : AppCompatActivity() {
         val registerButton = findViewById<Button>(R.id.add)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        vehicleViewModel = ViewModelProviders.of(this, RegistrationViewModelFactory())
+        val database: VehicleDatabase = VehicleDatabase.getDatabase(this)
+
+        vehicleViewModel = ViewModelProviders.of(this, RegistrationViewModelFactory(database))
             .get(VehicleViewModel::class.java)
 
         vehicleViewModel.registrationFormState.observe(this@VehicleActivity, Observer {
@@ -67,9 +69,6 @@ class VehicleActivity : AppCompatActivity() {
                 ).show()
                 //TODO: reset fields
             }
-//            setResult(Activity.RESULT_OK)
-            //Complete and destroy register activity once successful
-//            finish()
         })
 
         name.afterTextChanged {
