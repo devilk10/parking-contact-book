@@ -5,11 +5,14 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.example.parkingmanager.database.dao.PersonDao
+import com.example.parkingmanager.database.dao.VehicleDao
 import com.example.parkingmanager.database.entity.Person
+import com.example.parkingmanager.database.entity.Vehicle
 
-@Database(entities = arrayOf(Person::class), version = 1)
+@Database(entities = arrayOf(Person::class, Vehicle::class), version = 1)
 abstract class VehicleDatabase : RoomDatabase() {
     abstract fun personDao(): PersonDao
+    abstract fun vehicleDao(): VehicleDao
 
     companion object {
         @Volatile

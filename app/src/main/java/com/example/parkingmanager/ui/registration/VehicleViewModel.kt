@@ -3,9 +3,8 @@ package com.example.parkingmanager.ui.registration
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.example.parkingmanager.data.VehicleRepository
-
 import com.example.parkingmanager.R
+import com.example.parkingmanager.data.VehicleRepository
 
 class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewModel() {
 
@@ -15,9 +14,14 @@ class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewM
     private val _registrationResult = MutableLiveData<RegistrationResult>()
     val registrationResult: LiveData<RegistrationResult> = _registrationResult
 
-    fun register(name: String, mobileNumber: String, vehicleNumber: String) {
+    fun register(
+        name: String,
+        mobileNumber: String,
+        vehicleNumber: String,
+        vehicleType: String
+    ) {
         // can be launched in a separate asynchronous job
-        val result = vehicleRepository.register(name, mobileNumber, vehicleNumber)
+        val result = vehicleRepository.register(name, mobileNumber, vehicleNumber, vehicleType)
         if (result) {
             _registrationResult.value = RegistrationResult(success = true)
         } else {

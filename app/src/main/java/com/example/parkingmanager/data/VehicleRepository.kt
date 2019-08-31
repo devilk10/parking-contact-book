@@ -7,15 +7,14 @@ package com.example.parkingmanager.data
 
 class VehicleRepository(val dataSource: VehicleDataSource) {
 
-    fun register(name: String, mobileNumber: String, vehicleNumber: String): Boolean {
-        // handle register
-        val result = dataSource.register(name, mobileNumber, vehicleNumber)
-
-        if (result is Result.Success) {
-            //TODO: action after registration
-            return true
-        }
-        return false
+    fun register(
+        name: String,
+        mobileNumber: String,
+        vehicleNumber: String,
+        vehicleType: String
+    ): Boolean {
+        val result = dataSource.register(name, mobileNumber, vehicleNumber, vehicleType)
+        return result is Result.Success
     }
 
 }

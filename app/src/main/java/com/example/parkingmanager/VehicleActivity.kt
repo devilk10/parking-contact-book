@@ -8,10 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import com.example.parkingmanager.database.VehicleDatabase
 import com.example.parkingmanager.ui.registration.RegistrationViewModelFactory
 import com.example.parkingmanager.ui.registration.VehicleViewModel
@@ -28,6 +25,7 @@ class VehicleActivity : AppCompatActivity() {
 
         val name = findViewById<EditText>(R.id.name)
         val vehicleNumber = findViewById<EditText>(R.id.vehicleNumber)
+        val vehicleType = findViewById<Spinner>(R.id.vehicle_type)
         val contact = findViewById<EditText>(R.id.mobileNumber)
         val registerButton = findViewById<Button>(R.id.add)
         val loading = findViewById<ProgressBar>(R.id.loading)
@@ -85,7 +83,12 @@ class VehicleActivity : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             loading.visibility = View.VISIBLE
-            vehicleViewModel.register(name.text.toString(), vehicleNumber.text.toString(), contact.text.toString())
+            vehicleViewModel.register(
+                name.text.toString(),
+                vehicleNumber.text.toString(),
+                contact.text.toString(),
+                vehicleType.selectedItem.toString()
+            )
         }
     }
 
