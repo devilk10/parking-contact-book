@@ -1,8 +1,9 @@
 <resources>
 	<string name="app_name">Parking Manager</string>
-	<string name="title_activity_main">MainActivity</string>
+	<string name="title_activity_main">Parking Manager</string>
 	<string name="title_activity_vehicle">Add Vehicle</string>
 	<string name="prompt_name">Name</string>
+	<string name="prompt_name_and_vehicle">Name or vehicle no.</string>
 	<string name="prompt_vehicle_number">MH 12 AB 1234</string>
 	<string name="prompt_mobile_number">Mobile No.</string>
 	<string name="action_register">Register</string>
