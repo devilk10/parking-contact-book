@@ -1,10 +1,10 @@
 package com.example.parkingmanager
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View

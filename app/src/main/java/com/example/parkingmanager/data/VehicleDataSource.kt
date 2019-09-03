@@ -42,5 +42,16 @@ class VehicleDataSource(database: VehicleDatabase) {
         }
         return result
     }
+
+    fun search(name: String) {
+        AsyncTask.execute {
+            try {
+                val a = personDao.findPersonALike(name)
+                Result.Success(a)
+            } catch (e: IOException) {
+                Result.Error(e)
+            }
+        }
+    }
 }
 
