@@ -1,5 +1,7 @@
 package com.example.parkingmanager.data
 
+import androidx.lifecycle.LiveData
+import com.example.parkingmanager.database.VehicleDatabase
 import com.example.parkingmanager.database.entity.Person
 
 /**
@@ -7,20 +9,26 @@ import com.example.parkingmanager.database.entity.Person
  * maintains an in-memory cache of register status and user credentials information.
  */
 
-class VehicleRepository(val dataSource: VehicleDataSource) {
+class VehicleRepository(val mDatabase: VehicleDatabase) {
 
-    fun register(
-        name: String,
-        mobileNumber: String,
-        vehicleNumber: String,
-        vehicleType: String
-    ): Boolean {
-        val result = dataSource.register(name, mobileNumber, vehicleNumber, vehicleType)
-        return result is Result.Success
+    companion object {
+        private fun getInstance(mDatabase: VehicleDatabase): VehicleRepository? {
+            var sInstance: VehicleRepository? = null
+            val LOCK = Any()
+
+            sInstance ?: synchronized(LOCK) {
+                sInstance ?: VehicleRepository(mDatabase)!!.also { sInstance = it }
+            }
+            return sInstance
+        }
     }
 
-    fun searchName(name: String) {
-        dataSource.search(name)
+    fun getAllPeople(): LiveData<List<Person>> {
+        return mDatabase.personDao().getAll()
+    }
+
+    fun register(name: String, mobileNumber: String, vehicleNumber: String, vehicleType: String): Boolean {
+        return true
     }
 
 }

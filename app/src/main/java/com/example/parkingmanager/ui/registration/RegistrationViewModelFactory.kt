@@ -2,7 +2,6 @@ package com.example.parkingmanager.ui.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.parkingmanager.data.VehicleDataSource
 import com.example.parkingmanager.data.VehicleRepository
 import com.example.parkingmanager.database.VehicleDatabase
 
@@ -17,7 +16,7 @@ class RegistrationViewModelFactory(private val vehicleData: VehicleDatabase) : V
         if (modelClass.isAssignableFrom(VehicleViewModel::class.java)) {
             return VehicleViewModel(
                 vehicleRepository = VehicleRepository(
-                    dataSource = VehicleDataSource(database = vehicleData)
+                    mDatabase = vehicleData
                 )
             ) as T
         }
