@@ -1,10 +1,12 @@
 package com.example.parkingmanager.ui.registration
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.parkingmanager.R
 import com.example.parkingmanager.data.VehicleRepository
+import com.example.parkingmanager.database.entity.Person
 
 class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewModel() {
 
@@ -13,6 +15,10 @@ class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewM
 
     private val _registrationResult = MutableLiveData<RegistrationResult>()
     val registrationResult: LiveData<RegistrationResult> = _registrationResult
+
+    fun getPeople(): LiveData<List<Person>> {
+        return vehicleRepository.getAllPeople()
+    }
 
     fun register(
         name: String,

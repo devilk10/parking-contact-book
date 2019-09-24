@@ -15,4 +15,8 @@ data class Person(
     @ColumnInfo(name = "mobile_number")
     var mobileNumber: String
 
-)
+) {
+    override fun toString(): String {
+        return "$name  mobile-> $mobileNumber"
+    }
+}
