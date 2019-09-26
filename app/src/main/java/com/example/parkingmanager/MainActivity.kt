@@ -2,6 +2,7 @@ package com.example.parkingmanager
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -43,7 +44,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun renderIt(people: List<Person>?) {
-        adapter = PeopleAdapter(people)
+        val peopleAlphabetically = people?.sortedBy { it.name.toLowerCase() }
+        peopleAlphabetically?.forEach {
+            Log.d(TAG, it.toString())
+        }
+        adapter = PeopleAdapter(peopleAlphabetically)
         messageRecyclerView.adapter = adapter
     }
 
