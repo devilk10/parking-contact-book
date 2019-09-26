@@ -3,11 +3,11 @@ package com.example.parkingmanager.data
 import androidx.lifecycle.LiveData
 import com.example.parkingmanager.database.VehicleDatabase
 import com.example.parkingmanager.database.entity.Person
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-/**
- * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of register status and user credentials information.
- */
 
 class VehicleRepository(val mDatabase: VehicleDatabase) {
 
@@ -27,8 +27,15 @@ class VehicleRepository(val mDatabase: VehicleDatabase) {
         return mDatabase.personDao().getAll()
     }
 
-    fun register(name: String, mobileNumber: String, vehicleNumber: String, vehicleType: String): Boolean {
-        return true
+    fun register(name: String, mobileNumber: String, vehicleNumber: String, vehicleType: String) {
+        val person = Person(null, name, mobileNumber)
+        GlobalScope.launch { addPersonBG(person) }
+    }
+
+    private suspend fun addPersonBG(person: Person) {
+        withContext(Dispatchers.IO) {
+            mDatabase.personDao().insert(person)
+        }
     }
 
 }

@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         vehicleViewModel?.getPeople()?.observe(this, Observer<List<Person>> { this.renderIt(it) })
 
         val layoutManager = LinearLayoutManager(this)
-        layoutManager.stackFromEnd = true
         messageRecyclerView.layoutManager = layoutManager
 
         fab.setOnClickListener {

@@ -12,9 +12,6 @@ class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewM
     private val _registrationForm = MutableLiveData<RegistrationFormState>()
     val registrationFormState: LiveData<RegistrationFormState> = _registrationForm
 
-    private val _registrationResult = MutableLiveData<RegistrationResult>()
-    val registrationResult: LiveData<RegistrationResult> = _registrationResult
-
     fun getPeople(): LiveData<List<Person>> {
         return vehicleRepository.getAllPeople()
     }
@@ -25,13 +22,7 @@ class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewM
         vehicleNumber: String,
         vehicleType: String
     ) {
-        // can be launched in a separate asynchronous job
-        val result = vehicleRepository.register(name, mobileNumber, vehicleNumber, vehicleType)
-        if (result) {
-            _registrationResult.value = RegistrationResult(success = true)
-        } else {
-            _registrationResult.value = RegistrationResult(error = R.string.registration_failed)
-        }
+        vehicleRepository.register(name, mobileNumber, vehicleNumber, vehicleType)
     }
 
     fun registrationDataChanged(name: String, mobileNumber: String, vehicleNumber: String) {

@@ -1,14 +1,14 @@
 package com.example.parkingmanager
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.parkingmanager.database.VehicleDatabase
 import com.example.parkingmanager.ui.registration.RegistrationViewModelFactory
 import com.example.parkingmanager.ui.registration.VehicleViewModel
@@ -26,9 +26,8 @@ class VehicleActivity : AppCompatActivity() {
         val name = findViewById<EditText>(R.id.name)
         val vehicleNumber = findViewById<EditText>(R.id.vehicleNumber)
         val vehicleType = findViewById<Spinner>(R.id.vehicle_type)
-        val contact = findViewById<EditText>(R.id.mobileNumber)
+        val mobileNumber = findViewById<EditText>(R.id.mobileNumber)
         val registerButton = findViewById<Button>(R.id.add)
-        val loading = findViewById<ProgressBar>(R.id.loading)
 
         val database: VehicleDatabase = VehicleDatabase.getDatabase(this)
 
@@ -52,23 +51,6 @@ class VehicleActivity : AppCompatActivity() {
             }
         })
 
-        vehicleViewModel.registrationResult.observe(this@VehicleActivity, Observer {
-            val registrationResult = it ?: return@Observer
-
-            loading.visibility = View.GONE
-            if (registrationResult.error != null) {
-                showRegistrationFailed(registrationResult.error)
-            }
-            if (registrationResult.success != null) {
-                Toast.makeText(
-                    applicationContext,
-                    "registration successful",
-                    Toast.LENGTH_LONG
-                ).show()
-                //TODO: reset fields
-            }
-        })
-
         name.afterTextChanged {
             notifyChange()
         }
@@ -82,14 +64,21 @@ class VehicleActivity : AppCompatActivity() {
         }
 
         registerButton.setOnClickListener {
-            loading.visibility = View.VISIBLE
             vehicleViewModel.register(
                 name.text.toString(),
                 vehicleNumber.text.toString(),
-                contact.text.toString(),
+                mobileNumber.text.toString(),
                 vehicleType.selectedItem.toString()
             )
+
+            clearTextBox()
         }
+    }
+
+    private fun clearTextBox() {
+        name.text.clear()
+        vehicleNumber.text.clear()
+        mobileNumber.text.clear()
     }
 
     private fun notifyChange() {
@@ -98,10 +87,6 @@ class VehicleActivity : AppCompatActivity() {
             mobileNumber.text.toString(),
             vehicleNumber.text.toString()
         )
-    }
-
-    private fun showRegistrationFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
 }
 
