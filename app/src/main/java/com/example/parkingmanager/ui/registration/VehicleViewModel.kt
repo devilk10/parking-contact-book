@@ -1,6 +1,5 @@
 package com.example.parkingmanager.ui.registration
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -48,11 +47,13 @@ class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewM
     }
 
     private fun isMobileNumberValid(number: String): Boolean {
-        return number.length > 9
+        return true
+//        return number.length > 9
     }
 
     private fun isVehicleNumberValid(number: String): Boolean {
-        val regex = """^[A-Z]{2}\s[0-9]{1,2}\s[A-Z]{1,2}\s[0-9]{1,4}${'$'}""".toRegex()
-        return regex.containsMatchIn(input = number)
+        return true
+//        val regex = """^[A-Z]{2}\s[0-9]{1,2}\s[A-Z]{1,2}\s[0-9]{1,4}${'$'}""".toRegex()
+//        return regex.containsMatchIn(input = number)
     }
 }
