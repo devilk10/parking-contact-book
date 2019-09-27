@@ -47,4 +47,8 @@ class VehicleViewModel(private val vehicleRepository: VehicleRepository) : ViewM
 //        val regex = """^[A-Z]{2}\s[0-9]{1,2}\s[A-Z]{1,2}\s[0-9]{1,4}${'$'}""".toRegex()
 //        return regex.containsMatchIn(input = number)
     }
+
+    fun filterPeople(filterText: String, people: List<Person>): List<Person> {
+        return people.filter { it.name.contains(filterText) }
+    }
 }
